@@ -23,9 +23,18 @@ namespace XFBugItemsViewController.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
-            LoadApplication(new App());
+            App.ScreenWidth = (double)UIScreen.MainScreen.Bounds.Width;
+            App.ScreenHeight = (double)UIScreen.MainScreen.Bounds.Height;
 
+            LoadApplication(new App());
             return base.FinishedLaunching(app, options);
+        }
+
+        public override void DidChangeStatusBarOrientation(UIApplication application, UIInterfaceOrientation oldStatusBarOrientation)
+        {
+            App.ScreenWidth = (double)UIScreen.MainScreen.Bounds.Width;
+            App.ScreenHeight = (double)UIScreen.MainScreen.Bounds.Height;
+            App.OnOrientationChanged();
         }
     }
 }
